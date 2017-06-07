@@ -8,21 +8,21 @@ module ReactOnRails
                    js_code: nil, console_messages: nil)
       message = "ERROR in SERVER PRERENDERING\n".dup
       if err
-        message << <<~MSG
+        message << <<-MSG
           Encountered error: \"#{err}\"
         MSG
         backtrace = err.backtrace.join("\n")
       else
         backtrace = nil
       end
-      message << <<~MSG
+      message << <<-MSG
         when prerendering #{component_name} with props: #{props}
         js_code was:
         #{js_code}
       MSG
 
       if console_messages
-        message << <<~MSG
+        message << <<-MSG
           console messages:
           #{console_messages}
         MSG
