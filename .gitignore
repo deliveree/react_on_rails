@@ -1,6 +1,7 @@
 /.bundle/
 /.yardoc
 /Gemfile.lock
+/Gemfile.rails32.lock
 /_yardoc/
 /coverage/
 /doc/
@@ -25,9 +26,8 @@ node_modules
 /node_package/lib
 
 yarn-debug.*
-spec/dummy/client/yarn-debug.log*
+yarn-error.*
 npm-debug.*
-spec/dummy/client/npm-debug.log*
 
 /gen-examples
 

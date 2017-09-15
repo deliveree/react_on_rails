@@ -1,3 +1,5 @@
+*Note: this doc needs updating to reflect how v8.x+ no longer puts Webpack generated files through the asset pipeline. PR's welcome!*
+
 # Using Webpack bundled assets with the Rails Asset Pipeline
 
 **If you're looking to use assets in your react components, look no further. This doc is for you.**
@@ -136,7 +138,7 @@ module.exports = {
   ],
 
   output: {
-    filename: 'webpack-bundle.js',
+    filename: 'hello-world-bundle.js',
     path: '../app/assets/webpack'
   },
 

@@ -14,7 +14,7 @@ gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
 gem "mini_racer"
 gem "puma"
-gem "rails", "5.1.1"
+gem "rails", "5.1.2"
 gem "rails_12factor"
 gem "rubocop", require: false
 gem "ruby-lint", require: false
@@ -38,6 +38,10 @@ gem "chromedriver-helper"
 gem "launchy"
 gem "poltergeist"
 gem "selenium-webdriver"
-gem "webpacker_lite"
+gem "webpacker", "~> 3.0"
 
+# TODO: remove once we get out of beta.
+# gem 'webpacker', path: "../../forks/webpacker"
+
+gem "equivalent-xml", github: "mbklein/equivalent-xml"
 gem "rainbow"

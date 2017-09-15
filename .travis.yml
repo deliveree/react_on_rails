@@ -6,6 +6,7 @@ rvm:
   # Rails 5 requires 2.2
   - 2.3.1
   - 2.4.1
+  - 2.2.6
 services:
   - docker
 
@@ -17,6 +18,7 @@ cache:
 
 gemfile:
   - spec/dummy/Gemfile
+  - spec/dummy_no_webpacker/Gemfile.rails32
 
 env:
   global:
@@ -36,7 +38,7 @@ install:
   - travis_retry gem install bundler
   - travis_retry nvm install node 8.0.0
   - node -v
-  - travis_retry npm i -g yarn@0.24.6
+  - travis_retry npm i -g yarn@0.27.5
   - travis_retry yarn global add babel-cli
   - travis_retry bundle install
   - travis_retry yarn
@@ -48,6 +50,15 @@ before_script:
 
 script:
   - bundle exec rake
+
+matrix:
+  exclude:
+    - gemfile: spec/dummy_no_webpacker/Gemfile.rails32
+      rvm: 2.3.1
+    - gemfile: spec/dummy_no_webpacker/Gemfile.rails32
+      rvm: 2.4.1
+    - gemfile: spec/dummy/Gemfile
+      rvm: 2.2.6
 
 notifications:
   slack:

@@ -13,19 +13,27 @@
 // 2. Make sure you have a hot-assets target in your client/package.json
 // 3. Start up `foreman start -f Procfile.hot` to start both Rails and the hot reload server.
 
-import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
 const { resolve } = require('path');
-import webpackConfig from './webpack.client.rails.hot.config';
+const webpackConfig = require('./webpack.client.rails.hot.config');
 
 const webpackConfigLoader = require('react-on-rails/webpackConfigLoader');
 const configPath = resolve('..', 'config');
-const { hotReloadingUrl, hotReloadingPort, hotReloadingHostname } = webpackConfigLoader(configPath);
+const { output, settings } = webpackConfigLoader(configPath);
 
 const compiler = webpack(webpackConfig);
 
 const devServer = new WebpackDevServer(compiler, {
-  contentBase: hotReloadingUrl,
+  publicPath: output.publicPath,
+  proxy: {
+    '*': output.publicPathWithHost,
+  },
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
+  disableHostCheck: true,
+  clientLogLevel: 'info',
   hot: true,
   inline: true,
   historyApiFallback: true,
@@ -41,9 +49,9 @@ const devServer = new WebpackDevServer(compiler, {
   },
 });
 
-devServer.listen(hotReloadingPort, hotReloadingHostname, err => {
+devServer.listen(settings.dev_server.port, settings.dev_server.host, err => {
   if (err) console.error(err);
   console.log(
-    `=> 🔥  Webpack development server is running on ${hotReloadingUrl}`
+    `=> 🔥  Webpack development server is running on ${output.publicPathWithHost}`
   );
 });

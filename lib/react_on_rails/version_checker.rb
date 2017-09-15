@@ -36,7 +36,8 @@ module ReactOnRails
             "                     gem: #{gem_version}\n" \
             "            node package: #{node_package_version.raw}\n" \
             "Ensure the installed version of the gem is the same as the version of \n"\
-            "your installed node package."
+            "your installed node package.\n"\
+            "Run `#{ReactOnRails::Utils.prepend_cd_node_modules_directory('yarn add react-on-rails')}`"
       raise msg
     end
 
