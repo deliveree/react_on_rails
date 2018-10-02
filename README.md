@@ -44,7 +44,7 @@ First be sure to run `rails -v` and check that you are using Rails 5.1.3 or abov
 This is the line where you turn server rendering on by setting prerender to true:
 
 ```
-<%%= react_component("HelloWorld", props: @hello_world_props, prerender: false) %>
+<%%= react_rails_component("HelloWorld", props: @hello_world_props, prerender: false) %>
 ```
 
 ---------------
@@ -237,12 +237,12 @@ Configure the `config/initializers/react_on_rails.rb`. You can adjust some neces
 + *Normal Mode (React component will be rendered on client):*
 
   ```erb
-  <%= react_component("HelloWorld", props: @some_props) %>
+  <%= react_rails_component("HelloWorld", props: @some_props) %>
   ```
 + *Server-Side Rendering (React component is first rendered into HTML on the server):*
 
   ```erb
-  <%= react_component("HelloWorld", props: @some_props, prerender: true) %>
+  <%= react_rails_component("HelloWorld", props: @some_props, prerender: true) %>
   ```
 
 + The `component_name` parameter is a string matching the name you used to expose your React component globally. So, in the above examples, if you had a React component named "HelloWorld", you would register it with the following lines:
@@ -259,7 +259,7 @@ Configure the `config/initializers/react_on_rails.rb`. You can adjust some neces
 
   ```ruby
     # Rails View
-    <%= react_component("HelloWorld", props: { name: "Stranger" }) %>
+    <%= react_rails_component("HelloWorld", props: { name: "Stranger" }) %>
   ```
 
   ```javascript
@@ -480,7 +480,7 @@ Once the bundled files have been generated in your `app/assets/webpack` folder a
 
 ### react_component
 ```ruby
-react_component(component_name,
+react_rails_component(component_name,
                 props: {},
                 prerender: nil,
                 trace: nil,
@@ -573,7 +573,7 @@ From your Rails view, you can use the provided helper `redux_store(store_name, p
 ```erb
 ...
 <%= redux_store("appStore", props: @react_props) %>;
-<%= react_component("NavbarApp") %>
+<%= react_rails_component("NavbarApp") %>
 yield
 ...
 ```
@@ -582,12 +582,12 @@ Components are created as [stateless function(al) components](https://facebook.g
 
 **_comments.html.erb**
 ```erb
-<%= react_component("CommentsApp") %>
+<%= react_rails_component("CommentsApp") %>
 ```
 
 **_blogs.html.erb**
 ```erb
-<%= react_component("BlogsApp") %>
+<%= react_rails_component("BlogsApp") %>
 ```
 
 *Note:* You will not be doing any partial updates to the Redux store when loading a new page. When the page content loads, React on Rails will rehydrate a new version of the store with whatever props are placed on the page.
